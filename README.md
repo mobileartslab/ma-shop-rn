@@ -1,2 +1,2 @@
-# ma_shop_rn
+# ma-shop-rn
 Mobile Arts Lab Shopping  - React Native
