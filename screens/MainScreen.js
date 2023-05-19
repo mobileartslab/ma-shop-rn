@@ -1,37 +1,40 @@
 import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  Button
+  Image, StyleSheet, Text, View, SafeAreaView, FlatList,
 } from 'react-native'
 import Images from '../assets/images'
+import data from '../data.json'
 
 const Card = props => {
-
+  const {category, headline, subHeadline, content, image} = props
   return (
      <View style={props.style}>
-       <Image source={Images.lp1} style={styles.image} />
-       <Text style={styles.category}>GIBSON</Text>
-       <Text style={styles.headline}>Les Paul Custom - Ebony with Ebony Fingerboard</Text>
-       <Text style={styles.subHeadline}>The One, the Only Les Paul Custom</Text>
-       <Text style={styles.content}>With its sonic punch, fluid playability, and classic "tuxedo" appointments, the Les Paul Custom is equal parts elegance and brute strength. Fitted with a matched 490/498 humbucker set that takes you from mellow jazz tones to full shred with a pinky twist, this majestic beast is ultra-responsive to your touch. Its fast-action neck, smooth-as-silk ebony fingerboard, and medium jumbo frets facilitate the speedy, dexterous fretwork weve heard across prog, fusion, and hard rock genres from guitar virtuosos like Robert Fripp, Al Di Meola, and Zakk Wylde. Gibson's Custom Shop luthiers selected premium mahogany for the body and capped it with a 2-piece carved maple top — a classic recipe for rich, sustaining, articulate tone that'll slice right through the mix.</Text>
+       <Image source={Images[image]} style={styles.image} />
+       <Text style={styles.category}>{category}</Text>
+       <Text style={styles.headline}>{headline}</Text>
+       <Text style={styles.subHeadline}>{subHeadline}</Text>
+       <Text style={styles.content}>{content}</Text>
     </View>
   )
-
 }
 
 export default function MainScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.innerContainer}>
-          <Card style={styles.card}/>
-        <Card style={styles.card}/>
-      </ScrollView>
-    </SafeAreaView>
+      <FlatList
+        data={data}
+        renderItem={({item}) => (
+          <Card
+            category={item.category}
+            headline={item.headline}
+            subHeadline={item.subHeadline}
+            content={item.content}
+            image={item.image}
+            style={styles.card}
+          />
+        )}
+        keyExtractor={item => item.id}
+      />
+   </SafeAreaView>
   );
 }
 
@@ -40,10 +43,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     alignItems: 'center',
     flex: 1
-  },
-  innerContainer: {
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
   },
   title: {
     fontSize: 32,
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     width: 350,
     padding: 20,
     borderRadius: 20,
-    marginVertical: 10,
+    margin: 10,
     shadowOffset: {width: 3, height: 5},
     shadowOpacity: 0.5,
     shadowRadius: 8,
