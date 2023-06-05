@@ -1,8 +1,8 @@
 import {
   Image, StyleSheet, Text, View, SafeAreaView, FlatList,
 } from 'react-native'
-import Images from '../assets/images'
-import data from '../data.json'
+import Images from '../../assets/images'
+import data from '../../data.json'
 
 const Card = props => {
   const {category, headline, subHeadline, content, image} = props
