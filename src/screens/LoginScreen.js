@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Image, StyleSheet, Text, View, SafeAreaView, TextInput, Button} from 'react-native'
+import {Image, StyleSheet, Text, View, TextInput, Pressable, ImageBackground} from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { AntDesign } from '@expo/vector-icons'
 import Images from '../../assets/images'
@@ -104,11 +104,8 @@ export default function LoginScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ImageBackground source={Images.appLogo} resizeMode="cover" style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>Shopper</Text>
-        <Image source={Images.appLogo} style={styles.logo} />
-        <View style={styles.spacer30} />
         <TextInput
           style={styles.input}
           placeholder="username"
@@ -134,25 +131,26 @@ export default function LoginScreen({ navigation }) {
             <Text color="white" ml="1">{errors.password}</Text>
           </View>)}
         <View style={styles.spacer20} />
-        <Button title="Log In" onPress={handleSubmit} />
+        <Pressable onPress={handleSubmit}>
+          <Text style={styles.submit}>Login</Text>
+          </Pressable>
         {errors.submit && (
           <View style={styles.submitErrorRow}>
             <AntDesign name="exclamationcircle" size={16} color="red"/>
             <Text color="white">{errors.submit}</Text>
           </View>)}
       </View>
-    </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
     alignItems: 'center',
     flex: 1
   },
   innerContainer: {
-    backgroundColor: '#ffffff',
+    paddingTop: 130,
     alignItems: 'center',
   },
   title: {
@@ -166,7 +164,10 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 10,
     borderWidth: 1,
-    borderRadius: 3,
+    borderColor: '#eeeeee',
+    borderRadius: 5,
+    fontSize: 18,
+    color: '#666666'
   },
   logo: {
     marginVertical: 20,
@@ -190,5 +191,10 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 20,
     justifyContent: 'center'
+  },
+  submit: {
+    fontSize: 26,
+    opacity: 0.7,
+    color: 'blue'
   }
 });

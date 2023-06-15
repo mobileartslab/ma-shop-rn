@@ -14,7 +14,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen}/>
+          <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
           <Stack.Screen name="Main" component={MainScreen} options={{ headerBackVisible: false }}/>
         </Stack.Navigator>
       </NavigationContainer>

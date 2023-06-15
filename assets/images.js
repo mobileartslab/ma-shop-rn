@@ -1,5 +1,5 @@
 const images = {
-  appLogo: require('./shop_login.png'),
+  appLogo: require('./nicks-guitar-heaven-tall.jpg'),
   lp1: require('./lp1.jpg'),
   lp2: require('./lp2.jpg'),
   lp3: require('./lp3.jpg'),
