@@ -1,14 +1,19 @@
 import {
   Image, StyleSheet, Text, View, SafeAreaView, FlatList,
 } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {GET_INVENTORY} from "../state/action_types";
 import Images from '../../assets/images'
 import data from '../../data.json'
+import { ASSET_URL } from '../constants/constants'
+import {action} from "../state/actions";
 
 const Card = props => {
   const {category, headline, subHeadline, content, image} = props
   return (
      <View style={props.style}>
-       <Image source={Images[image]} style={styles.image} />
+       <Image source={{ uri: ASSET_URL + image }} style={styles.image} />
        <Text style={styles.category}>{category}</Text>
        <Text style={styles.headline}>{headline}</Text>
        <Text style={styles.subHeadline}>{subHeadline}</Text>
@@ -18,10 +23,17 @@ const Card = props => {
 }
 
 export default function MainScreen() {
+  const dispatch = useDispatch()
+  const app = useSelector((state) => state.app)
+
+  useEffect(() => {
+    dispatch(action({ type: GET_INVENTORY}))
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data}
+        data={app?.inventory}
         renderItem={({item}) => (
           <Card
             category={item.category}
